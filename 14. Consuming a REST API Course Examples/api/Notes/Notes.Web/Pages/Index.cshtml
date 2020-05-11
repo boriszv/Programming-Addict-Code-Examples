@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <a href="@Model.BasePath" class="pt-2">
+        <button class="btn btn-primary">Click here to get a new API key</button>
+    </a>
+
+    @if (@Model.APIKey != null)
+    {
+        <p class="pt-2 api-key-text" id="apiKey">APIKey: @Model.APIKey</p>
+    }
+
+</div>

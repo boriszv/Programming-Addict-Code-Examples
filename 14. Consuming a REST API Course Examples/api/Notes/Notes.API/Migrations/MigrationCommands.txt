@@ -1,0 +1,3 @@
+﻿InitialMigration:
+	Add-Migration InitialMigration
+	Script-Migration
