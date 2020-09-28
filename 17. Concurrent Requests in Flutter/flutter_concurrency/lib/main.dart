@@ -38,9 +38,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future _fetchData() async {
-    setState(() {
-      _showLoading = true;
-    });
+    setState(() { _showLoading = true; });
 
     final postResult = await http.get('http://jsonplaceholder.typicode.com/posts/1');
     final commentsResult = await http.get('http://jsonplaceholder.typicode.com/comments?postId=1');
@@ -57,9 +55,7 @@ class _HomePageState extends State<HomePage> {
   // ----------------------
 
   // Future _fetchData() async {
-  //   setState(() {
-  //     _showLoading = true;
-  //   });
+  //   setState(() { _showLoading = true; });
 
   //   // final postResult = await http.get('http://jsonplaceholder.typicode.com/posts/1');
   //   // final commentsResult = await http.get('http://jsonplaceholder.typicode.com/comments?postId=1');
@@ -99,37 +95,47 @@ class _HomePageState extends State<HomePage> {
                 Text(post['title'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
 
                 SizedBox(height: 10),
-                Row(
-                  children: [
-                    Text('Show comments', style: TextStyle(fontWeight: FontWeight.bold),),
-                    GestureDetector(
-                      child: CupertinoSwitch(
-                        value: _showComments,
-                        onChanged: (bool value) { setState(() { _showComments = value; }); },
-                      ),
-                      onTap: () { setState(() { _showComments = !_showComments; }); },
-                    ),
-                  ],
-                ),
+
+                _showCommentsToggle(),
+
                 SizedBox(height: 10),
 
                 if (!_showComments)
                   Text(post['body'], style: TextStyle(fontSize: 14)),
 
                 if (_showComments)
-                  ...comments.map((comment) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(comment['email'], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
-                      Text(comment['body'],  style: TextStyle(fontSize: 14)),
-                      SizedBox(height: 15)
-                    ],
-                  )).toList()
+                  ..._commentList()
               ]
             ],
           ),
         ),
       ),
     );
+  }
+
+  _showCommentsToggle() {
+    return Row(
+      children: [
+        Text('Show comments', style: TextStyle(fontWeight: FontWeight.bold),),
+        GestureDetector(
+          child: CupertinoSwitch(
+            value: _showComments,
+            onChanged: (bool value) { setState(() { _showComments = value; }); },
+          ),
+          onTap: () { setState(() { _showComments = !_showComments; }); },
+        ),
+      ],
+    );
+  }
+
+  _commentList() {
+    return comments.map((comment) => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(comment['email'], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+        Text(comment['body'],  style: TextStyle(fontSize: 14)),
+        SizedBox(height: 15)
+      ],
+    )).toList();
   }
 }
