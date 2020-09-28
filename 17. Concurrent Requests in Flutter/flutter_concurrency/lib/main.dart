@@ -56,25 +56,25 @@ class _HomePageState extends State<HomePage> {
   // #region Future.wait
   // ----------------------
 
-  Future _fetchData() async {
-    setState(() {
-      _showLoading = true;
-    });
+  // Future _fetchData() async {
+  //   setState(() {
+  //     _showLoading = true;
+  //   });
 
-    // final postResult = await http.get('http://jsonplaceholder.typicode.com/posts/1');
-    // final commentsResult = await http.get('http://jsonplaceholder.typicode.com/comments?postId=1');
+  //   // final postResult = await http.get('http://jsonplaceholder.typicode.com/posts/1');
+  //   // final commentsResult = await http.get('http://jsonplaceholder.typicode.com/comments?postId=1');
 
-    final results = await Future.wait([
-      http.get('http://jsonplaceholder.typicode.com/posts/1'),
-      http.get('http://jsonplaceholder.typicode.com/comments?postId=1')
-    ]);
+  //   final results = await Future.wait([
+  //     http.get('http://jsonplaceholder.typicode.com/posts/1'),
+  //     http.get('http://jsonplaceholder.typicode.com/comments?postId=1')
+  //   ]);
 
-    setState(() {
-      post = json.decode(results[0].body);
-      comments = json.decode(results[1].body);
-      _showLoading = false;
-    });
-  }
+  //   setState(() {
+  //     post = json.decode(results[0].body);
+  //     comments = json.decode(results[1].body);
+  //     _showLoading = false;
+  //   });
+  // }
 
   // #endregion
   // ----------------------
