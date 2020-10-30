@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    
+
+
     _fetchData();
   }
 
@@ -42,14 +43,15 @@ class _HomePageState extends State<HomePage> {
 
     final results = await Future.wait([
       http.get('http://jsonplaceholder.typicode.com/posts/1'),
-      http.get('http://jsonplaceholder.typicode.com/comments?postId=1'),
+      http.get('http://jsonplaceholder.typicode.com/comments?postId=1')
     ]);
 
     setState(() {
       post = json.decode(results[0].body);
       comments = json.decode(results[1].body);
-      _showLoading = false;
     });
+
+    setState(() { _showLoading = false; });
   }
 
   @override
