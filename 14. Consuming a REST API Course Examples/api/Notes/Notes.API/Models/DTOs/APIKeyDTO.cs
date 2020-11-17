@@ -7,6 +7,6 @@ namespace Notes.API.Models.DTOs
 {
     public class APIKeyDTO
     {
-        public Guid ApiKey { get; set; }
+        public string ApiKey { get; set; }
     }
 }

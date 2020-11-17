@@ -24,9 +24,9 @@ namespace Notes.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetList([FromHeader] Guid apiKey)
+        public async Task<IActionResult> GetList([FromHeader] string apiKey)
         {
-            if (apiKey == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 return Unauthorized();
             }
@@ -42,10 +42,10 @@ namespace Notes.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{noteid}")]
-        public async Task<IActionResult> Get(Guid noteid, [FromHeader] Guid apiKey)
+        [HttpGet("{noteid}", Name = "Get")]
+        public async Task<IActionResult> Get(string noteid, [FromHeader] string apiKey)
         {
-            if (apiKey == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 return Unauthorized();
             }
@@ -61,9 +61,9 @@ namespace Notes.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] NoteInsertDTO data, [FromHeader] Guid apiKey)
+        public async Task<IActionResult> Post([FromBody] NoteInsertDTO data, [FromHeader] string apiKey)
         {
-            if (apiKey == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 return Unauthorized();
             }
@@ -74,30 +74,21 @@ namespace Notes.API.Controllers
             }
 
             var entity = _mapper.Map<Note>(data);
+
+            entity.NoteID = Guid.NewGuid().ToString();
             entity.CreateDateTime = DateTimeOffset.Now;
             entity.APIKeyID = apiKey;
 
             await _repository.AddNote(entity);
 
-            if (!await _repository.Save())
-            {
-                return StatusCode(500, "Creating note failed on save");
-            }
-
             var result = _mapper.Map<NoteDTO>(entity);
-            return CreatedAtAction(
-                nameof(Get),
-                new
-                {
-                    noteid = entity.NoteID
-                },
-                result);
+            return StatusCode(201, result);
         }
 
         [HttpPut("{noteid}")]
-        public async Task<IActionResult> Put(Guid noteid, [FromBody] NoteUpdateDTO data, [FromHeader] Guid apiKey)
+        public async Task<IActionResult> Put(string noteid, [FromBody] NoteUpdateDTO data, [FromHeader] string apiKey)
         {
-            if (apiKey == Guid.Empty)
+            if (apiKey == null)
             {
                 return Unauthorized();
             }
@@ -112,20 +103,14 @@ namespace Notes.API.Controllers
 
             entity.LatestEditDateTime = DateTime.Now;
 
-            _repository.UpdateNote(entity);
-
-            if (!await _repository.Save())
-            {
-                return StatusCode(500, "Updating note failed on save");
-            }
-
+            await _repository.UpdateNote(entity);
             return NoContent();
         }
 
         [HttpDelete("{noteid}")]
-        public async Task<IActionResult> Delete(Guid noteid, [FromHeader] Guid apiKey)
+        public async Task<IActionResult> Delete(string noteid, [FromHeader] string apiKey)
         {
-            if (apiKey == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 return Unauthorized();
             }
@@ -136,12 +121,6 @@ namespace Notes.API.Controllers
             }
 
             await _repository.RemoveNote(noteid, apiKey);
-
-            if (!await _repository.Save())
-            {
-                return StatusCode(500, "Deleting note failed on save");
-            }
-
             return NoContent();
         }
     }

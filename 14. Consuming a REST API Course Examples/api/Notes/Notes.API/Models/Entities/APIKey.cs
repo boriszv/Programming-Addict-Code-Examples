@@ -10,9 +10,7 @@ namespace Notes.API.Models.Entities
     [Table(nameof(APIKey))]
     public class APIKey
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ID { get; set; }
+        public string ID { get; set; }
 
         public List<Note> Notes { get; set; }
     }

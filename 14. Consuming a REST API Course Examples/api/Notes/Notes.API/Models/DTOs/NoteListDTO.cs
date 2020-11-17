@@ -7,7 +7,7 @@ namespace Notes.API.Models.DTOs
 {
     public class NoteListDTO
     {
-        public Guid NoteID { get; set; }
+        public string NoteID { get; set; }
 
         public string NoteTitle { get; set; }
 

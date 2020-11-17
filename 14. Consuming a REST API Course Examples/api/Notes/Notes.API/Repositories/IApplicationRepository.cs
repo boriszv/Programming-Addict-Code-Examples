@@ -8,23 +8,21 @@ namespace Notes.API.Repositories
 {
     public interface IApplicationRepository
     {
-        Task<bool> Save();
-
         #region Notes
 
-        Task<IEnumerable<Note>> GetNoteList(Guid apiKeyID);
-        Task<Note> GetNote(Guid noteId, Guid apiKeyID);
+        Task<IEnumerable<Note>> GetNoteList(string apiKeyID);
+        Task<Note> GetNote(string noteId, string apiKeyID);
         Task AddNote(Note note);
-        void UpdateNote(Note note);
-        Task RemoveNote(Guid noteId, Guid apiKeyID);
-        Task<bool> NoteExists(Guid noteId, Guid apiKeyID);
+        Task UpdateNote(Note note);
+        Task RemoveNote(string noteId, string apiKeyID);
+        Task<bool> NoteExists(string noteId, string apiKeyID);
 
         #endregion
 
         #region APIKey
 
         Task AddAPIKey(APIKey apiKey);
-        Task<bool> APIKeyExists(Guid apiKeyID);
+        Task<bool> APIKeyExists(string apiKeyID);
         
         #endregion
     }

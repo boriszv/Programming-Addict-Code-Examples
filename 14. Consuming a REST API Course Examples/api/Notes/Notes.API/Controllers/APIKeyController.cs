@@ -28,6 +28,7 @@ namespace Notes.API.Controllers
         {
             var entity = new APIKey
             {
+                ID = Guid.NewGuid().ToString(),
                 Notes = new List<Note>
                 {
                     new Note
@@ -52,11 +53,6 @@ namespace Notes.API.Controllers
             };
 
             await _repository.AddAPIKey(entity);
-
-            if (!await _repository.Save())
-            {
-                return StatusCode(500, "Creating APIKey failed on save");
-            }
 
             var result = _mapper.Map<APIKeyDTO>(entity);
             return Ok(result);

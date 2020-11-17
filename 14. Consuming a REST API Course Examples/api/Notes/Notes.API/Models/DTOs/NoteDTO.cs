@@ -1,12 +1,17 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Notes.Api.Models
+namespace Notes.API.Models.DTOs
 {
-    public class NoteForListingDto
+    public class NoteDTO
     {
         public string NoteID { get; set; }
 
         public string NoteTitle { get; set; }
+
+        public string NoteContent { get; set; }
 
         public DateTimeOffset CreateDateTime { get; set; }
 
