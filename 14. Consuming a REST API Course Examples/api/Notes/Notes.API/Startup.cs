@@ -37,12 +37,11 @@ namespace Notes.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Notes API", Version = "v1" });
             });
 
-            services.AddDbContext<ApplicationDbContext>();
-
-            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            // services.AddDbContext<ApplicationDbContext>();
 
             services.AddScoped(x => FirestoreDb.Create("tqnotes-7a62e"));
-            
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+
             #region Mapper
             var config = new MapperConfiguration(cfg =>
             {
