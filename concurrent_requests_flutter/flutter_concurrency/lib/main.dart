@@ -37,19 +37,30 @@ class _HomePageState extends State<HomePage> {
     _fetchData();
   }
 
+  Future<String> _futureError() async {
+    throw new Exception('my error');
+    return 'result';
+  }
+
   Future _fetchData() async {
     setState(() { _showLoading = true; });
 
     final results = await Future.wait([
       http.get('http://jsonplaceholder.typicode.com/posts/1'),
-      http.get('http://jsonplaceholder.typicode.com/comments?postId=1'),
+      _futureError().catchError((e) {
+        return 'error';
+      }),
     ]);
 
-    setState(() {
-      post = json.decode(results[0].body);
-      comments = json.decode(results[1].body);
-      _showLoading = false;
-    });
+    print(results[0]);
+    print(results[1]);
+
+    
+    // setState(() {
+    //   post = json.decode(results[0].body);
+    //   comments = json.decode(results[1].body);
+    //   _showLoading = false;
+    // });
   }
 
   @override
