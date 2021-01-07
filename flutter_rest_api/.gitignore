@@ -35,4 +35,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-*/permissions.json
+**/permissions.json
