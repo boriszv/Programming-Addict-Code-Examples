@@ -1,0 +1,4 @@
+#Sat Jan 23 18:09:49 CET 2021
+base.0=/home/boris/Documents/projects/pa_code/flutter_collapsible_app_bar/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
