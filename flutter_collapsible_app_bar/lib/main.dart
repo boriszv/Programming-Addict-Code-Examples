@@ -60,9 +60,16 @@ class _HomeState extends State<Home> {
               ),
             ),
 
-            SliverList(
-              delegate: SliverChildListDelegate(items.map((e) => Text(e.toString())).toList()),
-            )
+            // SliverList(
+            //   delegate: SliverChildListDelegate(items.map((e) => Padding(
+            //     padding: EdgeInsets.all(8.0),
+            //     child: Container(
+            //       height: 100,
+            //       width: double.infinity,
+            //       color: Colors.blue,
+            //     ),
+            //   )).toList()),
+            // )
           ],
       )));
   }
