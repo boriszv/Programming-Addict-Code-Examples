@@ -54,15 +54,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return WebView(
-      initialUrl: 'https://whatmyuseragent.com/',
+      initialUrl: 'https://www.youtube.com/channel/UCy4TEe4CGipnHotkBztYvng',
       javascriptMode: JavascriptMode.unrestricted,
-      onWebViewCreated: (WebViewController webViewController) async {
-        _controller.complete(webViewController);
+      // onWebViewCreated: (WebViewController webViewController) async {
+      //   _controller.complete(webViewController);
 
-        final String contentBase64 =
-            base64Encode(const Utf8Encoder().convert(exampleHtml));
-        await webViewController.loadUrl('data:text/html;base64,$contentBase64');
-      },
+      //   final String contentBase64 =
+      //       base64Encode(const Utf8Encoder().convert(exampleHtml));
+      //   await webViewController.loadUrl('data:text/html;base64,$contentBase64');
+      // },
       onProgress: (int progress) {
         print("WebView is loading (progress : $progress%)");
       },
@@ -74,10 +74,10 @@ class _HomeState extends State<Home> {
             })
       },
       navigationDelegate: (NavigationRequest request) {
-        if (request.url.startsWith('https://www.youtube.com/')) {
-          print('blocking navigation to $request}');
-          return NavigationDecision.prevent;
-        }
+        // if (request.url.startsWith('https://www.youtube.com/')) {
+        //   print('blocking navigation to $request}');
+        //   return NavigationDecision.prevent;
+        // }
         print('allowing navigation to $request');
         return NavigationDecision.navigate;
       },
