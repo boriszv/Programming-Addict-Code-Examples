@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "623318740871",
+    "project_id": "videosproject-d5edc",
+    "storage_bucket": "videosproject-d5edc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623318740871:android:d0c69afc66859f7e586d22",
+        "android_client_info": {
+          "package_name": "com.programmingaddict.firebase_sorting_filtering"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623318740871-inkv349kkf46d3m24o8rco6j5kkkjr4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCym-DIfc4V9gzR7BMImzXxpUX_O-JBV08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623318740871-inkv349kkf46d3m24o8rco6j5kkkjr4t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
